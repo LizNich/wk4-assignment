@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "vite",
-    "build": "npm i && vite build",
+    "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

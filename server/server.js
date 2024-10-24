@@ -14,8 +14,16 @@ dotenv.config();
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 // TEST - endpoint
-app.get("/", (request, response) => response.json("wow - this is working!"));
+//app.get("/", (request, response) => response.json("wow - this is working!"));
 
-app.listen(8080, function () {
-  console.log("Running on PORT 8080");
+// POST endpoint / make a query to the DB / send back resp
+app.post("/messages", async function (request, response) {
+  const { message, username } = request.body;
+  const result = await db.query(
+    "INSERT INTO messages (name, message) VALUES ($1, $2)",
+    [user, message]
+  );
+  response.json(result);
 });
+
+app.listen(8080, () => console.log("Running on PORT 8080"));

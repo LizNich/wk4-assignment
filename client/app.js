@@ -1,9 +1,18 @@
-const h1 = document.querySelector("h1");
+const messageForm = document.getElementById("messageForm");
 
-async function updateh1() {
-  const response = await fetch("https://wk4-assignment.onrender.com");
-  const data = await response.json();
-  h1.textContent = data;
+async function handleSubmit(event) {
+  event.preventDefault();
+  // GET
+  const formData = new FormData(messageForm);
+  const body = Object.fromEntries(formData);
+  //POST request
+  const response = await fetch("https://wk4-assignment.onrender.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  console.log(response);
 }
 
-updateh1();
+messageForm.addEventListener("submit", handleSubmit);
